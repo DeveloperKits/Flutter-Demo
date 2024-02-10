@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_project/pages/list_view_example.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -99,9 +100,9 @@ class ContactsAction extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          CustomAction(iconData: Icons.account_balance, text: "Bank",),
-          CustomAction(iconData: Icons.account_balance_wallet, text: "Balance"),
-          CustomAction(iconData: Icons.credit_card, text: "Card"),
+          CustomAction(iconData: Icons.list_alt_outlined, text: "List View", page: ListViewPage(),),
+          CustomAction(iconData: Icons.countertops_sharp, text: "Counter Page",page: ListViewPage(),),
+          CustomAction(iconData: Icons.photo_album_rounded, text: "Photo Gallery", page: ListViewPage(),),
         ],
       ),
     );
@@ -110,23 +111,33 @@ class ContactsAction extends StatelessWidget {
 
 class CustomAction extends StatelessWidget {
   const CustomAction({
-    super.key, required this.iconData, required this.text,
+    super.key, required this.iconData, required this.text, required this.page
   });
 
   final IconData iconData;
   final String text;
+  final Object page;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(iconData, size: 35, color: Colors.orangeAccent,),
-        const SizedBox(height: 5.0,),
-        Text(
-          text,
-          style: const TextStyle(color: Colors.orangeAccent),
-        ),
-      ],
+    return InkWell(
+      onTap:(){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ListViewPage()),
+        );
+      },
+      borderRadius: BorderRadius.circular(10),
+      child: Column(
+        children: [
+          Icon(iconData, size: 35, color: Colors.orangeAccent,),
+          const SizedBox(height: 5.0,),
+          Text(
+            text,
+            style: const TextStyle(color: Colors.orangeAccent),
+          ),
+        ],
+      ),
     );
   }
 }
